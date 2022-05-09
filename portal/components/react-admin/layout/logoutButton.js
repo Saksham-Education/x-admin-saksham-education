@@ -20,15 +20,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Logout = () => {
-  const classes = useStyles();  
+  const classes = useStyles();
   return (
     <Button
       className={classes.logOutButton}
-      onClick={async() => {
+      onClick={async () => {
         const session = await getSession();
         console.log("Logging out");
-        await deleteFingerprint(session);       
-        signOut(); 
+        await deleteFingerprint(session);
+        signOut();
       }}
     >
       <PowerSettingsNewIcon className={classes.logOutIcon} />

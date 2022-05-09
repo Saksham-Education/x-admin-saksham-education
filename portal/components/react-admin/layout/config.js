@@ -17,7 +17,7 @@ export const resourceConfig = [
     create: null,
     label: "Samiksha Attendance",
     icon: "person",
-  },  
+  },
   {
     name: "users",
     list: null,

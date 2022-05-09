@@ -85,15 +85,15 @@ export default NextAuth({
   session: {
     jwt: true,
   },
-  cookies: {    
+  cookies: {
     callbackUrl: {
       name: `__Secure-next-auth.callback-url`,
       options: {
-        sameSite: 'lax',
-        path: '/',
-        secure: true
-      }
-    }    
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+      },
+    },
   },
   callbacks: {
     redirect(url, baseUrl) {
