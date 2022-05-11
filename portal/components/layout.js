@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import styles from "../styles/layout.module.css";
+import PropTypes from "prop-types"
 
-const Layout = ({ children, home }) => {
+const Layout = ({ children }) => {
   const transitionStages = {
     FADE_OUT: "fadeOut",
     FADE_IN: "fadeIn",
@@ -81,4 +82,8 @@ const Layout = ({ children, home }) => {
   );
 };
 
+Layout.propTypes ={
+  children:PropTypes.element
+
+}
 export default Layout;

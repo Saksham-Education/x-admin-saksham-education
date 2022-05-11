@@ -4,18 +4,16 @@ import axios from "axios";
 import fs from "fs";
 import pathFile from "path";
 import jwt from "jsonwebtoken";
-const CryptoJS = require("crypto-js");
 
 const verifyOrCreate = async (token, refreshToken) => {
   const cert = fs.readFileSync(pathFile.resolve("", "./jwt.pem"));
-  let verify = false;
   return jwt.verify(
     token,
     cert,
     { algorithms: ["RS256"] },
-    async function (err, payload) {
+    async function (err) {
       if (err) {
-        try {
+        // try {
           const responce = await axios.get(
             `${process.env.FUSIONAUTH_DOMAIN}/api/jwt/issue`,
             {
@@ -29,9 +27,10 @@ const verifyOrCreate = async (token, refreshToken) => {
           if (responce.data) {
             return responce.data.token;
           }
-        } catch (err) {
-          throw err;
-        }
+        // } 
+        // catch (err) {
+        //   throw err;
+        // }
       } else {
         return token;
       }
@@ -66,9 +65,9 @@ export default NextAuth({
     Providers.Credentials({
       id: "fusionauth",
       name: "FusionAuth Credentials Login",
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         let response = null;
-        try {
+        // try {
           response = await fusionAuthLogin(
             process.env.FUSIONAUTH_DOMAIN,
             credentials
@@ -76,9 +75,9 @@ export default NextAuth({
           if (response.data) {
             return response.data;
           }
-        } catch (err) {
-          throw err;
-        }
+        // } catch (err) {
+        //   throw err;
+        // }
       },
     }),
   ],
@@ -96,10 +95,10 @@ export default NextAuth({
     },
   },
   callbacks: {
-    redirect(url, baseUrl) {
+    redirect(url) {
       return url;
     },
-    async jwt(token, user, account, profile, isNewUser) {
+    async jwt(token, user, account, profile) {
       // Add access_token to the token right after signin
       if (account) {
         token.username = profile.user?.username;

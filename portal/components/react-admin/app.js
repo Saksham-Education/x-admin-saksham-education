@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { AdminContext, AdminUI, Resource, useDataProvider } from "react-admin";
-import buildHasuraProvider, { buildFields } from "ra-data-hasura";
+import React, { useState, useEffect } from "react";
+import { AdminContext, AdminUI, Resource } from "react-admin";
+import buildHasuraProvider from "ra-data-hasura";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { useSession, signOut } from "next-auth/client";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
@@ -10,6 +10,7 @@ import customFields from "./customHasura/customFields";
 import customVariables from "./customHasura/customVariables";
 import { resourceConfig } from "./layout/config";
 import { verifyFingerprint } from "../../utils/tokenManager";
+import PropTypes  from "prop-types";
 
 const App = () => {
   const [dataProvider, setDataProvider] = useState(null);
@@ -81,4 +82,7 @@ function AsyncResources({ client }) {
   );
 }
 
+AsyncResources.propTypes = {
+  client:PropTypes.object
+}
 export default App;

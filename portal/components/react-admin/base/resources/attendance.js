@@ -4,22 +4,15 @@ import {
   SimpleList,
   Datagrid,
   TextField,
-  Edit,
-  SimpleForm,
-  TextInput,
   Filter,
   SearchInput,
 } from "react-admin";
 
-import { Typography, makeStyles, useMediaQuery } from "@material-ui/core";
-import EditNoDeleteToolbar from "../components/EditNoDeleteToolbar";
-import BackButton from "../components/BackButton";
+import {  makeStyles, useMediaQuery } from "@material-ui/core";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import { useSession, signOut } from "next-auth/client";
 import {
-  getOrCreateFingerprint,
   verifyFingerprint,
-  deleteFingerprint,
 } from "../../../../utils/tokenManager";
 
 const useStyles = makeStyles((theme) => ({

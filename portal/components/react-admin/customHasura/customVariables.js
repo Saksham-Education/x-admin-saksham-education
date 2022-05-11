@@ -17,7 +17,7 @@ const SPLIT_TOKEN = "#";
 import getFinalType from "./getFinalType";
 
 const buildGetListVariables =
-  (introspectionResults) => (resource, aorFetchType, params) => {
+  () => (resource, aorFetchType, params) => {
     const result = {};
     let { filter: filterObj = {} } = params;
     const { customFilters = [] } = params;
@@ -71,14 +71,14 @@ const buildGetListVariables =
     }, {});
     filterObj = omit(filterObj, orFilterKeys);
 
-    const makeNestedFilter = (obj, operation) => {
-      if (Object.keys(obj).length === 1) {
-        const [key] = Object.keys(obj);
-        return { [key]: makeNestedFilter(obj[key], operation) };
-      } else {
-        return { [operation]: obj };
-      }
-    };
+    // const makeNestedFilter = (obj, operation) => {
+    //   if (Object.keys(obj).length === 1) {
+    //     const [key] = Object.keys(obj);
+    //     return { [key]: makeNestedFilter(obj[key], operation) };
+    //   } else {
+    //     return { [operation]: obj };
+    //   }
+    // };
 
     const filterReducer = (obj) => (acc, key) => {
       let filter;
@@ -191,7 +191,7 @@ const typeAwareKeyValueReducer =
   };
 
 const buildUpdateVariables =
-  (introspectionResults) => (resource, aorFetchType, params, queryType) => {
+  (introspectionResults) => (resource, aorFetchType, params) => {
     const reducer = typeAwareKeyValueReducer(
       introspectionResults,
       resource,
@@ -231,7 +231,7 @@ const buildUpdateVariables =
   };
 
 const buildCreateVariables =
-  (introspectionResults) => (resource, aorFetchType, params, queryType) => {
+  (introspectionResults) => (resource, aorFetchType, params) => {
     const reducer = typeAwareKeyValueReducer(
       introspectionResults,
       resource,

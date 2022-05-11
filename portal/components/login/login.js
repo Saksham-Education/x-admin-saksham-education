@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useToasts } from "react-toast-notifications";
 import { getSession, signIn } from "next-auth/client";
 import { useRouter } from "next/router";
@@ -7,15 +7,16 @@ import styles from "../../styles/Login.module.css";
 import axios from "axios";
 import Image from "next/image";
 const CryptoJS = require("crypto-js");
-const FingerprintJS = import("@fingerprintjs/fingerprintjs");
+
 import {
   getOrCreateFingerprint,
-  verifyFingerprint,
   deleteFingerprint,
 } from "../../utils/tokenManager";
 import "../../node_modules/text-security/text-security.css";
+import PropTypes from "prop-types"
 
-export default function Login(props) {
+
+function Login(props) {
   const { persona } = props;
   const [input, setInput] = useState({});
   const [captcha, setCaptcha] = useState(null);
@@ -77,7 +78,7 @@ export default function Login(props) {
   }, [inputValidity]);
 
   useEffect(() => {
-    const response = axios
+     axios
       .get(process.env.NEXT_PUBLIC_CAPTCHA_URL)
       .then((resp) => {
         const { blob } = resp.data;
@@ -99,9 +100,8 @@ export default function Login(props) {
     e.preventDefault();
     const password = passwordOnBlurEncrypt(input.password, "password", true);
     let rightNow = new Date();
-    let visitorId = null;
     try {
-      const result = await axios({
+      await axios({
         method: "POST",
         url: `${process.env.NEXT_PUBLIC_CAPTCHA_URL}`,
         data: {
@@ -207,3 +207,16 @@ export default function Login(props) {
     </div>
   );
 }
+
+Login.propTypes = {
+  persona: PropTypes.shape({
+    consonant: PropTypes.bool,
+    en: PropTypes.string,
+    hi: PropTypes.string,
+    credentials: PropTypes.string,
+    applicationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    redirectUrl: PropTypes.string,
+  }).isRequired,
+}
+
+export default Login;
