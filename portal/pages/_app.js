@@ -4,7 +4,7 @@ import { Provider } from "next-auth/client";
 import { ToastProvider } from "react-toast-notifications";
 import PropTypes from "prop-types";
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   return (
     <ToastProvider
       autoDismiss={true}
@@ -16,10 +16,11 @@ function MyApp({ Component, pageProps }) {
       </Provider>
     </ToastProvider>
   );
-}
+};
 
 MyApp.propTypes = {
   Component: PropTypes.element,
   pageProps: PropTypes.node,
-}
+};
+
 export default MyApp;

@@ -9,7 +9,7 @@ import {
 import { makeStyles } from "@material-ui/core";
 import CustomSidebar from "./customSidebar";
 import AppBar from "./customAppBar";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -83,17 +83,18 @@ const CustomLayout = (props) => {
 };
 
 CustomLayout.propTypes = {
-  children : PropTypes.node,
-   logout : PropTypes.any,
-    open : PropTypes.bool,
-     title : PropTypes.string,
-     sidebarOpen : PropTypes.bool,
-     resources : PropTypes.arrayOf(PropTypes.object)
-}
+  children: PropTypes.element,
+  logout: PropTypes.any,
+  open: PropTypes.bool,
+  title: PropTypes.string,
+  sidebarOpen: PropTypes.bool,
+  resources: PropTypes.arrayOf(PropTypes.object),
+};
 
 const mapStateToProps = (state) => ({
   isLoading: state.admin.loading > 0,
   resources: getResources(state),
   sidebarOpen: state.admin.ui.sidebarOpen,
 });
+
 export default connect(mapStateToProps, { setSidebarVisibility })(CustomLayout);

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import SmartphoneIcon from "@material-ui/icons/Smartphone";
 import SchoolIcon from "@material-ui/icons/School";
 import PersonIcon from "@material-ui/icons/Person";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   sidebarItem: {
@@ -44,12 +44,12 @@ const Icon = (props) => {
   return <></>;
 };
 
-const VerticalItem = (props) => {
-  const { item, nestedLevel, activePath } = props;
+const VerticalItem = ({ item, nestedLevel, activePath }) => {
+  // const { item, nestedLevel, activePath } = props;
   const classes = useStyles({
     itemPadding: nestedLevel > 0 ? 30 + nestedLevel * 16 : 24,
   });
-  
+
   let sidebarItemName = item.label;
   if (item.options !== undefined && item.options.label !== undefined) {
     sidebarItemName = item.options.label;
@@ -67,14 +67,15 @@ const VerticalItem = (props) => {
   );
 };
 
-Icon.propTypes ={
+Icon.propTypes = {
   type: PropTypes.string,
-  className: PropTypes.object
-}
+  className: PropTypes.object,
+};
 
-VerticalItem.propTypes ={
+VerticalItem.propTypes = {
   item: PropTypes.object,
   nestedLevel: PropTypes.number,
-  activePath:PropTypes.string
-}
+  activePath: PropTypes.string,
+};
+
 export default VerticalItem;

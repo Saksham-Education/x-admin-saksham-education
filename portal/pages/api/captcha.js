@@ -23,13 +23,11 @@ const handler = async (req, res) => {
       }
       return true;
     } catch (err) {
-      res
-        .status(500)
-        .json({
-          errors: "Captcha service unavailable",
-          success: null,
-          err: err,
-        });
+      res.status(500).json({
+        errors: "Captcha service unavailable",
+        success: null,
+        err: err,
+      });
       return true;
     }
   }

@@ -10,17 +10,14 @@ import {
   Filter,
   SearchInput,
 } from "react-admin";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
-
-import {  makeStyles, useMediaQuery } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 import EditNoDeleteToolbar from "../components/EditNoDeleteToolbar";
 import BackButton from "../components/BackButton";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import { useSession, signOut } from "next-auth/client";
-import {
-  verifyFingerprint,
-} from "../../../../utils/tokenManager";
+import { verifyFingerprint } from "../../../../utils/tokenManager";
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {
@@ -193,7 +190,5 @@ export const UserSamikshaEdit = (props) => {
 };
 
 UserSamikshaEdit.propTypes = {
-  history : PropTypes.any
-}
-
-
+  history: PropTypes.any,
+};

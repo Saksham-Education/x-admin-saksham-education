@@ -10,7 +10,7 @@ import customFields from "./customHasura/customFields";
 import customVariables from "./customHasura/customVariables";
 import { resourceConfig } from "./layout/config";
 import { verifyFingerprint } from "../../utils/tokenManager";
-import PropTypes  from "prop-types";
+import PropTypes from "prop-types";
 
 const App = () => {
   const [dataProvider, setDataProvider] = useState(null);
@@ -28,7 +28,8 @@ const App = () => {
       headers: hasuraHeaders,
     });
     console.log("TESTTTINGGGGG", process.env.NEXT_PUBLIC_HASURA_URL);
-    async function buildDataProvider() {
+
+    const buildDataProvider = async () => {
       const vf = await verifyFingerprint(session, signOut);
       if (vf) {
         const hasuraProvider = await buildHasuraProvider(
@@ -41,7 +42,7 @@ const App = () => {
         setDataProvider(() => hasuraProvider);
         setApolloClient(tempClient);
       }
-    }
+    };
     buildDataProvider();
   }, [session]);
 
@@ -52,7 +53,7 @@ const App = () => {
     </AdminContext>
   );
 };
-function AsyncResources({ client }) {
+const AsyncResources = ({ client }) => {
   let introspectionResultObjects =
     client.cache?.data?.data?.ROOT_QUERY?.__schema.types
       ?.filter((obj) => obj.kind === "OBJECT")
@@ -80,9 +81,10 @@ function AsyncResources({ client }) {
       </AdminUI>
     </MuiThemeProvider>
   );
-}
+};
 
 AsyncResources.propTypes = {
-  client:PropTypes.object
-}
+  client: PropTypes.object,
+};
+
 export default App;

@@ -10,9 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSession, signOut } from "next-auth/client";
-import {
-  verifyFingerprint,
-} from "../../../utils/tokenManager";
+import { verifyFingerprint } from "../../../utils/tokenManager";
 
 const useStyles = makeStyles((theme) => ({
   title: {

@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/layout.module.css";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
 const Layout = ({ children }) => {
   const transitionStages = {
@@ -82,8 +82,8 @@ const Layout = ({ children }) => {
   );
 };
 
-Layout.propTypes ={
-  children:PropTypes.element
+Layout.propTypes = {
+  children: PropTypes.element,
+};
 
-}
 export default Layout;

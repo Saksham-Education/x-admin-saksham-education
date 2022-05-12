@@ -8,12 +8,10 @@ import {
   SearchInput,
 } from "react-admin";
 
-import {  makeStyles, useMediaQuery } from "@material-ui/core";
+import { makeStyles, useMediaQuery } from "@material-ui/core";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import { useSession, signOut } from "next-auth/client";
-import {
-  verifyFingerprint,
-} from "../../../../utils/tokenManager";
+import { verifyFingerprint } from "../../../../utils/tokenManager";
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {

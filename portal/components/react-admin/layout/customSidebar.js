@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const CustomSidebar = (props) => {
   const [activePath, setActivePath] = useState(null);
   const { location, resources } = props;
@@ -101,14 +100,14 @@ const SidebarWrapper = React.memo(function SidebarWrapper({
 });
 
 CustomSidebar.propTypes = {
-  location : PropTypes.string,
-  activePath : PropTypes.string,
-  resources : PropTypes.arrayOf(PropTypes.object)
-}
+  location: PropTypes.string,
+  activePath: PropTypes.string,
+  resources: PropTypes.arrayOf(PropTypes.object),
+};
+
 SidebarWrapper.propTypes = {
- 
-  activePath : PropTypes.string,
-  filteredResources : PropTypes.arrayOf(PropTypes.object)
-}
+  activePath: PropTypes.string,
+  filteredResources: PropTypes.arrayOf(PropTypes.object),
+};
 
 export default withRouter((props) => <CustomSidebar {...props} />);

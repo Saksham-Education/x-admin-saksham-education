@@ -13,7 +13,7 @@ const verifyOrCreate = async (token, refreshToken) => {
     { algorithms: ["RS256"] },
     async function (err) {
       if (err) {
-        // try {
+        try {
           const responce = await axios.get(
             `${process.env.FUSIONAUTH_DOMAIN}/api/jwt/issue`,
             {
@@ -27,10 +27,9 @@ const verifyOrCreate = async (token, refreshToken) => {
           if (responce.data) {
             return responce.data.token;
           }
-        // } 
-        // catch (err) {
-        //   throw err;
-        // }
+        } catch (err) {
+          throw err;
+        }
       } else {
         return token;
       }
@@ -67,7 +66,7 @@ export default NextAuth({
       name: "FusionAuth Credentials Login",
       async authorize(credentials) {
         let response = null;
-        // try {
+        try {
           response = await fusionAuthLogin(
             process.env.FUSIONAUTH_DOMAIN,
             credentials
@@ -75,9 +74,10 @@ export default NextAuth({
           if (response.data) {
             return response.data;
           }
-        // } catch (err) {
-        //   throw err;
-        // }
+        } catch (err) {
+          console.log("Error auth:", err);
+          throw err;
+        }
       },
     }),
   ],

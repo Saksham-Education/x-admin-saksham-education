@@ -13,10 +13,9 @@ import {
   deleteFingerprint,
 } from "../../utils/tokenManager";
 import "../../node_modules/text-security/text-security.css";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 
-
-function Login(props) {
+const Login = (props) => {
   const { persona } = props;
   const [input, setInput] = useState({});
   const [captcha, setCaptcha] = useState(null);
@@ -78,7 +77,7 @@ function Login(props) {
   }, [inputValidity]);
 
   useEffect(() => {
-     axios
+    axios
       .get(process.env.NEXT_PUBLIC_CAPTCHA_URL)
       .then((resp) => {
         const { blob } = resp.data;
@@ -206,7 +205,7 @@ function Login(props) {
       </form>
     </div>
   );
-}
+};
 
 Login.propTypes = {
   persona: PropTypes.shape({
@@ -217,6 +216,6 @@ Login.propTypes = {
     applicationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     redirectUrl: PropTypes.string,
   }).isRequired,
-}
+};
 
 export default Login;

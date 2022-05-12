@@ -44,7 +44,7 @@ const Track = () => {
   const { addToast } = useToasts();
 
   useEffect(() => {
-       axios
+    axios
       .get(process.env.NEXT_PUBLIC_CAPTCHA_URL)
       .then((resp) => {
         const { blob } = resp.data;

@@ -6,8 +6,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import Popover from "@material-ui/core/Popover";
 import { useSession } from "next-auth/client";
 import CustomLogoutButton from "./logoutButton";
-import PropTypes from "prop-types"
-
+import PropTypes from "prop-types";
 
 const UserMenu = ({ logout }) => {
   const [session] = useSession();
@@ -84,11 +83,12 @@ const UserMenuComponent = ({ user }) => {
   );
 };
 
-UserMenu.propTypes= {
+UserMenu.propTypes = {
   logout: PropTypes.any,
-}
+};
 
-UserMenuComponent.propTypes= { 
+UserMenuComponent.propTypes = {
   user: PropTypes.object,
-}
+};
+
 export default UserMenu;
