@@ -4,16 +4,14 @@ import axios from "axios";
 import fs from "fs";
 import pathFile from "path";
 import jwt from "jsonwebtoken";
-const CryptoJS = require("crypto-js");
 
 const verifyOrCreate = async (token, refreshToken) => {
   const cert = fs.readFileSync(pathFile.resolve("", "./jwt.pem"));
-  let verify = false;
   return jwt.verify(
     token,
     cert,
     { algorithms: ["RS256"] },
-    async function (err, payload) {
+    async function (err) {
       if (err) {
         try {
           const responce = await axios.get(
@@ -66,7 +64,7 @@ export default NextAuth({
     Providers.Credentials({
       id: "fusionauth",
       name: "FusionAuth Credentials Login",
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         let response = null;
         try {
           response = await fusionAuthLogin(
@@ -77,6 +75,7 @@ export default NextAuth({
             return response.data;
           }
         } catch (err) {
+          console.log("Error auth:", err);
           throw err;
         }
       },
@@ -85,21 +84,21 @@ export default NextAuth({
   session: {
     jwt: true,
   },
-  cookies: {    
+  cookies: {
     callbackUrl: {
       name: `__Secure-next-auth.callback-url`,
       options: {
-        sameSite: 'lax',
-        path: '/',
-        secure: true
-      }
-    }    
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+      },
+    },
   },
   callbacks: {
-    redirect(url, baseUrl) {
+    redirect(url) {
       return url;
     },
-    async jwt(token, user, account, profile, isNewUser) {
+    async jwt(token, user, account, profile) {
       // Add access_token to the token right after signin
       if (account) {
         token.username = profile.user?.username;

@@ -10,11 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSession, signOut } from "next-auth/client";
-import {
-  getOrCreateFingerprint,
-  verifyFingerprint,
-  deleteFingerprint,
-} from "../../../utils/tokenManager";
+import { verifyFingerprint } from "../../../utils/tokenManager";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -44,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AppBarCustom = (props) => {
-  const [session, loading] = useSession();
+const AppBarCustom = () => {
+  const [session] = useSession();
   const classes = useStyles();
   const dispatch = useDispatch();
   const open = useSelector((state) => state.admin.ui.sidebarOpen);
